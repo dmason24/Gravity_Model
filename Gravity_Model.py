@@ -99,7 +99,7 @@ class GravityModel:
         final_matrix.loc["Destination"] = final_matrix.sum()  # Add sum of columns as Destination
         return final_matrix
 
-    def run(self, O, D, cost_matrix, deterrence_matrix, error_threshold=0.01, improvement_threshold=1e-4):
+    def run(self, O, D, cost_matrix, deterrence_matrix, error_threshold=0.01, improvement_threshold=1e-4, max_iterations=1e6):
         """
         Execute the gravity model algorithm.
         
@@ -165,6 +165,9 @@ class GravityModel:
             elif error_change < improvement_threshold:
                 stop_reason = "Slow improvement"  # Set stop reason
                 break  # Break the loop if improvement is slow
+            elif iteration_count >= max_iterations:
+                stop_reason = "Max Iterations met" # Set stop reason
+                break # Break the loop if too many iterations are performed
 
             previous_error = error  # Update the previous error
             Bj = Bj_new  # Update Bj with new values
