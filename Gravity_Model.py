@@ -145,6 +145,7 @@ class GravityModel:
         # Iterative process
         while True:
             iteration_count += 1  # Increment iteration count
+            print(iteration_count)
 
             # Update balancing factors
             Ai, Bj_new = self.update_balancing_factors(O_normalized, D_normalized, deterrence_matrix, Ai, Bj)
@@ -182,8 +183,6 @@ class GravityModel:
         self.final_matrix = self.create_final_matrix_dataframe(Tij)
 
         # Print the final results
-        print("Final OD Matrix:")
-        print(self.final_matrix.round(3), "\n")
         print(f"Number of Iterations: {self.iteration_count}")
         print(f"Stopping Condition: {self.stop_reason}")
         print(f"Error: {self.error*100:.3f}%")
